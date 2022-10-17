@@ -11,4 +11,5 @@ class AdminProfile(admin.ModelAdmin):
 
 @admin.register(Item)
 class ItemAdmin(admin.ModelAdmin):
+    # list_display = ['pk', 'album_name']
     pass
