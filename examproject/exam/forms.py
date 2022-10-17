@@ -42,29 +42,34 @@ class CreateItemForm(forms.ModelForm):
 
         fields = '__all__'
 
-        widgets = {
-            'album_name': forms.TextInput(
-                attrs={
-                    'placeholder': 'Album Name',
-                }),
-            'artist': forms.TextInput(
-                attrs={
-                    'placeholder': 'Artist',
-                }),
-            'description': forms.Textarea(
-                attrs={
-                    'placeholder': 'Description',
-                }),
-            'image_url': forms.URLInput(
-                attrs={
-                    'placeholder': 'Image URL',
-                }),
-            'price': forms.NumberInput(
-                attrs={
-                    'placeholder': 'Price',
-                })
+        # widgets = {
+        #     'album_name': forms.TextInput(
+        #         attrs={
+        #             'placeholder': 'Album Name',
+        #         }),
+        #     'artist': forms.TextInput(
+        #         attrs={
+        #             'placeholder': 'Artist',
+        #         }),
+        #     'description': forms.Textarea(
+        #         attrs={
+        #             'placeholder': 'Description',
+        #         }),
+        #     'image_url': forms.URLInput(
+        #         attrs={
+        #             'placeholder': 'Image URL',
+        #         }),
+        #     'price': forms.NumberInput(
+        #         attrs={
+        #             'placeholder': 'Price',
+        #         })
+        #
+        # }
 
-        }
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for fieldname in self.fields:
+            self.fields[fieldname].widget.attrs['placeholder'] = self.fields[fieldname].label
 
 
 class EditItemForm(forms.ModelForm):
@@ -78,38 +83,36 @@ class DeleteItemForm(forms.ModelForm):
         model = Item
         fields = '__all__'
 
-        widgets = {
-            'album_name': forms.TextInput(
-                attrs={
-                    'readonly': 'readonly',
-                }),
-            'artist': forms.TextInput(
-                attrs={
-                    'readonly': True,
-                }),
-            'genre': forms.TextInput(
-                attrs={
-                    'disabled': 'disabled',
-                }),
-            'description': forms.Textarea(
-                attrs={
-                    'disabled': 'disabled',
-                }),
-            'image_url': forms.URLInput(
-                attrs={
-                    'disabled': 'disabled',
-                }),
-            'price': forms.NumberInput(
-                attrs={
-                    'disabled': 'disabled',
-                })
+        # widgets = {
+        #     'album_name': forms.TextInput(
+        #         attrs={
+        #             'readonly': 'readonly',
+        #         }),
+        #     'artist': forms.TextInput(
+        #         attrs={
+        #             'readonly': True,
+        #         }),
+        #     'genre': forms.TextInput(
+        #         attrs={
+        #             'disabled': 'disabled',
+        #         }),
+        #     'description': forms.Textarea(
+        #         attrs={
+        #             'disabled': 'disabled',
+        #         }),
+        #     'image_url': forms.URLInput(
+        #         attrs={
+        #             'disabled': 'disabled',
+        #         }),
+        #     'price': forms.NumberInput(
+        #         attrs={
+        #             'disabled': 'disabled',
+        #         })
+        #
+        # }
 
-        }
-
-
-# class DeleteAlbumForm(CreateAlbumForm):
-#     def __init__(self, *args, **kwargs):
-#         super().__init__(*args, **kwargs)
-#         for (_, field) in self.fields.items():
-#             field.widget.attrs['disabled'] = 'disabled'
-#             field.widget.attrs['readonly'] = 'readonly'
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for (_, field) in self.fields.items():
+            field.widget.attrs['disabled'] = 'disabled'
+            field.widget.attrs['readonly'] = 'readonly'
