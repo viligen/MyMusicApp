@@ -1,2 +1,2 @@
 # MyMusicApp
-Exam prep - Django MTV and Forms (No user authentication)
+Exam prep - Django MVT and Forms (No user authentication)
